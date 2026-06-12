@@ -81,7 +81,7 @@ export default function CreateGroupModal({ onClose, onSuccess, defaultType = 'ot
                   <button
                     key={gt.value}
                     type="button"
-                    className={`split-type-chip ${form.group_type === gt.value ? 'active' : ''}`}
+                    className={`split-chip ${form.group_type === gt.value ? 'active' : ''}`}
                     onClick={() => setForm(p => ({ ...p, group_type: gt.value }))}
                     id={`group-type-${gt.value}`}
                     style={{ fontSize: 14, padding: '8px 16px' }}
