@@ -125,13 +125,22 @@ SIMPLE_JWT = {
 }
 
 # CORS
-CORS_ALLOWED_ORIGINS = os.environ.get(
-    'CORS_ALLOWED_ORIGINS',
-    'http://localhost:5173,http://localhost:3000'
-).split(',')
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS += [
-    'https://*.vercel.app',
+
+# Allow local dev origins
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'http://localhost:5174',
+]
+
+env_origins = os.environ.get('CORS_ALLOWED_ORIGINS')
+if env_origins:
+    CORS_ALLOWED_ORIGINS += [origin.strip() for origin in env_origins.split(',') if origin.strip()]
+
+# Support Vercel wildcards (preview & production deploys)
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.vercel\.app$",
 ]
 
 CURRENCY = 'INR'
