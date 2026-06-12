@@ -158,7 +158,7 @@ export default function AddExpenseModal({ groupId, groupMembers, defaultFriendId
 
         <form onSubmit={handleSubmit}>
           {/* "With you and: [group/friend]" */}
-          <div className="expense-modal-with-group">
+          <div className="exp-modal-with">
             With <strong>you</strong> and:{' '}
             {groupId ? (
               <span style={{ fontWeight: 600 }}>🏘️ {groupMembers?.length || 0} others</span>
@@ -185,9 +185,9 @@ export default function AddExpenseModal({ groupId, groupMembers, defaultFriendId
           </div>
 
           {/* ICON + DESCRIPTION */}
-          <div className="expense-modal-icon-amount">
+          <div className="exp-modal-icon-row">
             <div
-              className="expense-category-icon-big"
+              className="exp-category-icon-lg"
               style={{ background: currentCategory.color, cursor: 'pointer' }}
               onClick={() => setStep(step === 'category' ? 'main' : 'category')}
               title="Change category"
@@ -197,7 +197,7 @@ export default function AddExpenseModal({ groupId, groupMembers, defaultFriendId
             <input
               id="expense-description"
               type="text"
-              className="expense-desc-input"
+              className="exp-desc-input"
               placeholder="Description"
               value={form.description}
               onChange={e => setForm(p => ({ ...p, description: e.target.value }))}
@@ -228,12 +228,12 @@ export default function AddExpenseModal({ groupId, groupMembers, defaultFriendId
           )}
 
           {/* AMOUNT */}
-          <div className="expense-amount-row">
-            <div className="expense-currency-box">₹</div>
+          <div className="exp-amount-row">
+            <div className="exp-currency">₹</div>
             <input
               id="expense-amount"
               type="number"
-              className="expense-amount-input"
+              className="exp-amount-input"
               placeholder="0.00"
               value={form.total_amount}
               onChange={e => setForm(p => ({ ...p, total_amount: e.target.value }))}
@@ -243,11 +243,11 @@ export default function AddExpenseModal({ groupId, groupMembers, defaultFriendId
 
           {/* SPLIT LABEL - clickable like Splitwise */}
           <div
-            className="expense-split-bar"
+            className="exp-split-bar"
             style={{ cursor: 'pointer' }}
             onClick={() => setStep(step === 'split' ? 'main' : 'split')}
           >
-            <div className="expense-split-tag">{splitLabel()}</div>
+            <div className="exp-split-chip">{splitLabel()}</div>
           </div>
 
           {/* SPLIT DETAIL (expanded) */}
@@ -271,12 +271,12 @@ export default function AddExpenseModal({ groupId, groupMembers, defaultFriendId
               {/* Split type */}
               <div style={{ marginBottom: 12 }}>
                 <label className="form-label">Split</label>
-                <div className="split-type-row" style={{ flexWrap: 'wrap' }}>
+                <div className="split-chips" style={{ flexWrap: 'wrap' }}>
                   {SPLIT_TYPES.map(st => (
                     <button
                       key={st.value}
                       type="button"
-                      className={`split-type-chip ${form.split_type === st.value ? 'active' : ''}`}
+                      className={`split-chip ${form.split_type === st.value ? 'active' : ''}`}
                       onClick={() => setForm(p => ({ ...p, split_type: st.value }))}
                       id={`split-${st.value}`}
                     >
@@ -347,8 +347,8 @@ export default function AddExpenseModal({ groupId, groupMembers, defaultFriendId
           )}
 
           {/* BOTTOM META BAR - date, group, etc. — exact Splitwise */}
-          <div className="expense-modal-bottom">
-            <div className="expense-modal-meta">
+          <div className="exp-modal-bottom">
+            <div className="exp-modal-meta">
               <Calendar size={16} />
               <input
                 id="expense-date"
@@ -360,7 +360,7 @@ export default function AddExpenseModal({ groupId, groupMembers, defaultFriendId
             </div>
 
             {!groupId && friends.length > 0 && (
-              <div className="expense-modal-meta">
+              <div className="exp-modal-meta">
                 <Users size={16} />
                 <select
                   style={{ border: 'none', background: 'transparent', fontSize: 13, color: '#6c757d', cursor: 'pointer' }}
