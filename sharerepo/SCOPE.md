@@ -1,6 +1,6 @@
 # SCOPE: Anomaly Log & Database Schema
 
-## 🗄️ Database Schema
+## Database Schema
 
 We use a normalized relational schema built in SQLite/PostgreSQL:
 
@@ -62,7 +62,7 @@ We use a normalized relational schema built in SQLite/PostgreSQL:
 
 ---
 
-## 🔍 Anomaly Log (12 Spreadsheet Problems Handled)
+## Anomaly Log (12 Spreadsheet Problems Handled)
 
 Here are the 12 deliberate data problems our ingestion engine detects and manages:
 
