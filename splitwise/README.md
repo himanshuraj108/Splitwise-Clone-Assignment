@@ -8,7 +8,7 @@ A full-stack expense splitting application built as an internship assignment for
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -23,7 +23,7 @@ A full-stack expense splitting application built as an internship assignment for
 
 ---
 
-## 🚀 Local Setup
+## Local Setup
 
 ### Prerequisites
 - Python 3.11+
@@ -79,7 +79,7 @@ Frontend runs at: **http://localhost:5173**
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 SPLITWISE/
@@ -110,7 +110,7 @@ SPLITWISE/
 
 ---
 
-## 🗄️ Database Schema
+## Database Schema
 
 ```sql
 users            -- Custom auth user with UUID PK, avatar_color
@@ -125,7 +125,7 @@ messages         -- Chat messages per expense
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -147,7 +147,7 @@ messages         -- Chat messages per expense
 
 ---
 
-## 🔑 Environment Variables
+## Environment Variables
 
 ### Backend `.env`
 ```
@@ -167,7 +167,7 @@ VITE_SUPABASE_ANON_KEY=your-anon-key
 
 ---
 
-## 🚢 Deployment
+## Deployment
 
 ### Backend → Render.com
 1. Push to GitHub
@@ -183,28 +183,28 @@ VITE_SUPABASE_ANON_KEY=your-anon-key
 
 ---
 
-## ✅ Features
+## Features
 
-- ✅ Login / Register (JWT auth)
-- ✅ Add friends by email
-- ✅ Create groups (trip/home/couple/other)
-- ✅ Invite & remove group members
-- ✅ Add expenses with 4 split types:
+- Login / Register (JWT auth)
+- Add friends by email
+- Create groups (trip/home/couple/other)
+- Invite & remove group members
+- Add expenses with 4 split types:
   - Equal split
   - Unequal (exact amounts)
   - Percentage (must sum to 100%)
   - By shares
-- ✅ Real-time chat on expenses (3s polling)
-- ✅ Per-friend balance summary
-- ✅ Per-group balance with **debt simplification**
-- ✅ Record debt settlements (Settle Up)
-- ✅ Dashboard with total balance, you owe, you're owed
-- ✅ Profile page with avatar color picker
-- ✅ Dark mode design system
+- Real-time chat on expenses (3s polling)
+- Per-friend balance summary
+- Per-group balance with **debt simplification**
+- Record debt settlements (Settle Up)
+- Dashboard with total balance, you owe, you're owed
+- Profile page with avatar color picker
+- Dark mode design system
 
 ---
 
-## 🤖 AI Tool
+## AI Tool
 
 **Tool:** Antigravity IDE (powered by Claude Sonnet 4.6 Thinking)
 
