@@ -2,7 +2,7 @@
 
 FairShare is a production-ready full-stack shared expenses application built to handle messy real-world transaction spreadsheets, dynamic group memberships, multi-currency splits, and debt simplification.
 
-## 🚀 Local Setup
+## Local Setup
 
 ### Prerequisites
 *   Python 3.11+
@@ -65,10 +65,10 @@ FairShare is a production-ready full-stack shared expenses application built to 
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 *   **Frontend**: React 18 + Vite + Lucide Icons + React Hot Toast
 *   **Backend**: Django 4.2 + Django REST Framework + SimpleJWT (Token Auth)
 *   **Database**: SQLite (local dev) / PostgreSQL (production setup ready via dj-database-url)
 
-## 🤖 AI Development Collaborator
+## AI Development Collaborator
 This application was co-developed using the **Antigravity IDE** powered by Google DeepMind's agentic AI coding models. All models, logic, schemas, and UI elements were designed collaboratively and vetted line-by-line.
