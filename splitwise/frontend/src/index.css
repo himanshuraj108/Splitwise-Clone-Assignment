@@ -843,7 +843,7 @@ input, select, textarea { font-family: inherit; font-size: 14px; }
   display: flex; align-items: center; justify-content: center;
   z-index: 1000; padding: 16px;
 }
-.modal-box {
+.modal, .modal-box {
   background: white;
   border-radius: 10px;
   width: 100%; max-width: 520px;
