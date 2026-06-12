@@ -1,0 +1,30 @@
+# Node
+node_modules/
+dist/
+dist-ssr/
+npm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+ENV/
+*.log
+
+# Databases
+db.sqlite3
+
+# Environment/Secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Editors
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
