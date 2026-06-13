@@ -28,13 +28,25 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 class GroupSerializer(serializers.ModelSerializer):
     members_count = serializers.SerializerMethodField()
+    latest_import = serializers.SerializerMethodField()
 
     class Meta:
         model = Group
-        fields = ('id', 'name', 'created_at', 'members_count')
+        fields = ('id', 'name', 'created_at', 'members_count', 'latest_import')
 
     def get_members_count(self, obj):
         return obj.memberships.count()
+
+    def get_latest_import(self, obj):
+        latest = obj.imports.order_by('-uploaded_at').first()
+        if latest:
+            return {
+                "id": latest.id,
+                "status": latest.status,
+                "filename": latest.filename,
+                "uploaded_at": latest.uploaded_at
+            }
+        return None
 
 class GroupMembershipSerializer(serializers.ModelSerializer):
     user_detail = UserSerializer(source='user', read_only=True)

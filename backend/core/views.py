@@ -14,7 +14,7 @@ from .serializers import (
     GroupMembershipSerializer, ExpenseSerializer, PaymentSerializer, 
     CSVImportSerializer, CSVAnomalySerializer
 )
-from .importer import CSVImporter
+from .importer import CSVImporter, parse_csv_date
 
 User = get_user_model()
 
@@ -117,7 +117,8 @@ class CSVUploadView(views.APIView):
         import_log = CSVImport.objects.create(
             uploaded_by=request.user,
             filename=csv_file.name,
-            status='PENDING'
+            status='PENDING',
+            group=group
         )
 
         # Parse CSV file wrapper
@@ -156,20 +157,25 @@ class ResolveAnomalyView(views.APIView):
             anomaly.save()
 
             import_log = anomaly.import_log
-            group = import_log.expenses.first().group if import_log.expenses.exists() else Group.objects.filter(memberships__user=request.user).first()
+            group = import_log.group
             if not group:
-                # Fallback to group attached to other anomalies or memberships
-                # We can fetch the group ID from the importer configuration or use the first active group
                 group = Group.objects.filter(memberships__user=request.user).first()
 
             if action == 'APPROVE':
                 # Process the anomaly type based on the raw data
                 raw = anomaly.raw_data
-                parsed_date = datetime.strptime(raw['date'], "%Y-%m-%d").date() if '-' in raw['date'] else datetime.strptime(raw['date'], "%m/%d/%Y").date()
-                raw_amount = Decimal(raw['amount'])
+                parsed_date = parse_csv_date(raw['date'])
+                if not parsed_date:
+                    parsed_date = datetime.today().date()
+                
+                import re
+                raw_amount_str = re.sub(r"[^\d.-]", "", raw['amount']) if raw['amount'] else "0"
+                raw_amount = Decimal(raw_amount_str)
                 
                 # Retrieve or create payer
-                payer_name = raw['paid_by']
+                payer_name = raw.get('paid_by') or edited_data.get('paid_by')
+                if not payer_name:
+                    payer_name = request.user.username
                 try:
                     payer = User.objects.get(username=payer_name)
                 except User.DoesNotExist:
@@ -178,6 +184,7 @@ class ResolveAnomalyView(views.APIView):
                         email=f"{payer_name.lower()}@example.com",
                         password=User.objects.make_random_password()
                     )
+
 
                 GroupMembership.objects.get_or_create(
                     group=group,
@@ -307,6 +314,7 @@ class CSVImportReportView(views.APIView):
 
         anomalies = import_log.anomalies.all()
         report = {
+            "id": import_log.id,
             "import_id": import_log.id,
             "filename": import_log.filename,
             "uploaded_at": import_log.uploaded_at,
