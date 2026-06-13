@@ -11,8 +11,8 @@ function ProtectedRoute({ children }) {
   
   if (loading) {
     return (
-      <div style={{ display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', backgroundColor: '#090B0F', color: '#10B981' }}>
-        <div style={{ fontSize: '20px', fontWeight: 'bold' }}>Loading FairShare...</div>
+      <div className="flex h-screen items-center justify-center bg-background text-accent">
+        <div className="font-heading text-xl font-bold animate-pulse">Loading FairShare...</div>
       </div>
     );
   }
@@ -65,15 +65,18 @@ function App() {
           position="top-right" 
           toastOptions={{
             style: {
-              background: '#1A2030',
-              color: '#F3F4F6',
-              border: '1px solid #242E42',
+              background: '#FFFFFF',
+              color: '#09090B',
+              border: '1px solid #E4E4E7',
               borderRadius: '12px',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
+              fontFamily: 'Inter, sans-serif',
+              fontSize: '14px',
             },
             success: {
               iconTheme: {
-                primary: '#10B981',
-                secondary: '#1A2030',
+                primary: '#16A34A',
+                secondary: '#FFFFFF',
               },
             },
           }} 
