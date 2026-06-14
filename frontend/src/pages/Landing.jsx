@@ -3,12 +3,22 @@ import { useAuth } from '../contexts/AuthContext';
 import { toast } from 'react-hot-toast';
 import { Lock, User, Mail, Shield, Sparkles, Eye, EyeOff } from 'lucide-react';
 
+const demoUsers = [
+  { name: 'Aisha', role: 'CSV Uploader & Admin', timeline: 'Active Feb 1 onwards' },
+  { name: 'Rohan', role: 'Audit Log & Ledger Viewer', timeline: 'Active Feb 1 onwards' },
+  { name: 'Priya', role: 'Flatmate', timeline: 'Active Feb 1 onwards' },
+  { name: 'Dev', role: 'Visiting Member', timeline: 'Active Feb 1 onwards' },
+  { name: 'Meera', role: 'Flatmate (Timeline test)', timeline: 'Active Feb-March' },
+  { name: 'Sam', role: 'Flatmate (Timeline test)', timeline: 'Active April 15 onwards' },
+];
+
 export default function Landing() {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [showDemoMenu, setShowDemoMenu] = useState(false);
   const [avatarColor, setAvatarColor] = useState('#2563EB');
   const [loading, setLoading] = useState(false);
   const { login, register } = useAuth();
@@ -46,7 +56,51 @@ export default function Landing() {
   };
 
   return (
-    <div className="min-h-screen md:h-screen md:overflow-hidden bg-background flex flex-col md:flex-row">
+    <div className="min-h-screen md:h-screen md:overflow-hidden bg-background flex flex-col md:flex-row relative">
+      {/* Demo Credentials Dropdown */}
+      <div className="absolute top-6 right-6 z-50">
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setShowDemoMenu(!showDemoMenu)}
+            className="flex items-center gap-1.5 px-4 py-2 bg-surface hover:bg-accent-light border border-border hover:border-accent/30 text-textPrimary hover:text-accent rounded-xl text-xs font-semibold shadow-premium transition-all"
+          >
+            <Sparkles size={14} className="animate-pulse" />
+            <span>Demo Accounts</span>
+          </button>
+
+          {showDemoMenu && (
+            <div className="absolute right-0 mt-2 w-80 bg-surface border border-border rounded-2xl shadow-premium p-2 space-y-1 z-50">
+              <div className="px-3 py-2 border-b border-border/60">
+                <span className="block text-[11px] font-bold text-textMuted uppercase tracking-wider">Select Demo Account</span>
+              </div>
+              <div className="max-h-64 overflow-y-auto space-y-1 py-1">
+                {demoUsers.map((user) => (
+                  <button
+                    key={user.name}
+                    type="button"
+                    onClick={() => {
+                      setUsername(user.name);
+                      setPassword('flatmate123');
+                      setIsLogin(true);
+                      setShowDemoMenu(false);
+                      toast.success(`Filled credentials for ${user.name}`);
+                    }}
+                    className="w-full text-left px-3 py-2 hover:bg-accent-light/60 rounded-xl transition-colors flex flex-col gap-0.5 group"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-semibold text-textPrimary group-hover:text-accent transition-colors">{user.name}</span>
+                      <span className="text-[10px] text-accent/80 font-medium bg-accent-light px-2 py-0.5 rounded-full">{user.timeline}</span>
+                    </div>
+                    <span className="text-[11px] text-textMuted leading-none">{user.role}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
       {/* Left Pane - Marketing Highlight */}
       <div className="w-full md:w-1/2 bg-accent-light border-r border-border flex flex-col justify-center p-8 md:p-12 lg:p-16 xl:p-20">
         <div className="max-w-md mx-auto w-full space-y-8 lg:space-y-10">
