@@ -63,9 +63,8 @@ export default function Landing() {
           <button
             type="button"
             onClick={() => setShowDemoMenu(!showDemoMenu)}
-            className="flex items-center gap-1.5 px-4 py-2 bg-surface hover:bg-accent-light border border-border hover:border-accent/30 text-textPrimary hover:text-accent rounded-xl text-xs font-semibold shadow-premium transition-all"
+            className="flex items-center px-4 py-2 bg-accent hover:bg-accent-hover text-white rounded-xl text-xs font-semibold shadow-premium transition-all cursor-pointer"
           >
-            <Sparkles size={14} className="animate-pulse" />
             <span>Demo Accounts</span>
           </button>
 
@@ -86,7 +85,7 @@ export default function Landing() {
                       setShowDemoMenu(false);
                       toast.success(`Filled credentials for ${user.name}`);
                     }}
-                    className="w-full text-left px-3 py-2 hover:bg-accent-light/60 rounded-xl transition-colors flex flex-col gap-0.5 group"
+                    className="w-full text-left px-3 py-2 hover:bg-accent-light/60 rounded-xl transition-colors flex flex-col gap-0.5 group cursor-pointer"
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-semibold text-textPrimary group-hover:text-accent transition-colors">{user.name}</span>
